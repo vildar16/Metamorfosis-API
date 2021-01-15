@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator');
 
 UserCtrl.register = async (req, res) => {
 
-    const{email, password, name, lastname1, lastname2} = req.body;
+    const{email, password} = req.body;
 
 
     try {
@@ -24,7 +24,7 @@ UserCtrl.register = async (req, res) => {
         const errors = validationResult(req);
        
         if(!errors.isEmpty()){
-            return res.json({
+            return res.status(400).json({
                 ok:false,
                 msg: errors.errors[0].msg
             })
