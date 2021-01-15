@@ -1,13 +1,13 @@
 const UserCtrl = {};
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 
 
 UserCtrl.register = async (req, res) => {
 
-    const{email, password} = req.body;
+    const{email, password, name, lastname1, lastname2} = req.body;
 
 
     try {
@@ -16,8 +16,17 @@ UserCtrl.register = async (req, res) => {
         if(user){
             return res.status(400).json({
                 ok:false,
-                msg: 'Ese email ya está registrado'
+                msg: 'Ese email ya está registrado.'
 
+            })
+        }
+
+        const errors = validationResult(req);
+       
+        if(!errors.isEmpty()){
+            return res.json({
+                ok:false,
+                msg: errors.errors[0].msg
             })
         }
 
