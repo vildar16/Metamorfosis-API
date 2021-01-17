@@ -16,6 +16,7 @@ app.use(express.json());
 //----routes----
 app.use('/api/users', require('./routes/user'));
 app.use('/api/facts', require('./routes/funFact'));
+app.use('/api/species', require('./routes/species'));
 
 
 module.exports = app;
