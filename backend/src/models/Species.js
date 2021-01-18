@@ -43,13 +43,25 @@ const speciesSchema = new Schema(
         },
         description: {
             type: String,
-            required: true
+            required: true,
+            default: "No hay descripción de la mariposa"
+        },
+        photos: {
+            type: Array,
+            'default': ["https://res.cloudinary.com/dhh7tuvtw/image/upload/v1610998076/e2cvgro6kwt7f7kijm5o.jpg"]
+        },
+        tags: {
+            type: Array,
+            'default': []
+        },
+        accepted: {
+            type: Boolean,
+            default: false
         },
         stage: {
             type: String,
             enum : ['Mariposa', 'Oruga']
         }
-
     }, 
     {
     timestamps: true
