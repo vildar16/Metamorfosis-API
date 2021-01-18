@@ -1,6 +1,7 @@
 const SpeciesCtrl = {};
 const Species = require('../models/Species');
 const { validationResult } = require('express-validator');
+const { response } = require('express');
 
 
 
@@ -125,5 +126,84 @@ SpeciesCtrl.getCaterpillarsContributions = async (req, res) => {
 
 }
 
+SpeciesCtrl.addTags = async (req, res) => {
+    try {
+        
+        const {tag}=req.body;
+        const sp = await Species.findById(req.params.id);
+        console.log(sp)
+        await sp.tags.push(tag)
+        await sp.save()
+    
+        res.status(201).json({
+            ok: true,
+            msg: "Se ha agregado el tag " + tag + " a "+sp.name,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: "Error."
+        })
+    }
+
+}
+
+SpeciesCtrl.addPhoto = async (req, res) => {
+    try {
+        
+        const {photo}=req.body;
+        const sp = await Species.findById(req.params.id);
+        console.log(sp)
+        await sp.photos.push(photo)
+        await sp.save()
+    
+        res.status(201).json({
+            ok: true,
+            msg: "Se ha agregado otra foto a "+sp.name,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: "Error."
+        })
+    }
+
+}
+
+SpeciesCtrl.acceptSpecies = async (req, res) => {
+    try {
+        
+        await Species.updateOne({_id: req.params.id}, {accepted: true})
+        res.status(201).json({
+            ok: true,
+            msg: "Se ha aceptado el aporte"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: "Error."
+        })
+    }
+}
+
+SpeciesCtrl.updateSpecies = async (req, res) => {
+    try {
+        
+        await Species.updateOne({_id: req.params.id}, req.body)
+        res.status(201).json({
+            ok: true,
+            msg: "Se ha actualizado correctamente"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: "Error."
+        })
+    }
+}
 
 module.exports = SpeciesCtrl;

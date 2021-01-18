@@ -2,12 +2,12 @@ const { Router } = require('express');
 const router = Router();
 const { check } = require('express-validator');
 
-const{ addSpecies, getSpeciesById, search, getCaterpillars, getButterflies, getButterfliesContributions, getCaterpillarsContributions }= require("../controllers/SpeciesController");
+const{ addSpecies, getSpeciesById, search, getCaterpillars, getButterflies, getButterfliesContributions, getCaterpillarsContributions, addTags, addPhoto, acceptSpecies, updateSpecies }= require("../controllers/SpeciesController");
 
 router.post('/addSpecies',
              [
                 check('name', 'El nombre es obligatorio.').not().isEmpty(),
-                check('scientificName', 'El primer apellido es obligatorio.').not().isEmpty(),
+                check('scientificName', 'El nombre científico es obligatorio.').not().isEmpty(),
                 check('family', 'La familia es requerida.').not().isEmpty(),
                 check('genus', 'El género es requerido.').not().isEmpty(),
                 check('district', 'El distrito es requerido.').not().isEmpty(),
@@ -17,19 +17,27 @@ router.post('/addSpecies',
 
 
             ]
-             , addSpecies )
+             , addSpecies )  //agregar una nueva especie
 
-router.get('/getSpeciesById/:id', getSpeciesById)
+router.get('/getSpeciesById/:id', getSpeciesById) //obtener una especie por _id
 
-router.get('/search/:word', search)
+router.get('/search/:word', search) //busca por nombre, nombre cientifico, tags, familia o genero
 
-router.get('/getButterflies', getButterflies)
+router.get('/getButterflies', getButterflies) //obtiene las mariposas aceptadas
 
-router.get('/getCaterpillars', getCaterpillars)
+router.get('/getCaterpillars', getCaterpillars) //obtiene las orugas aceptadas
 
-router.get('/getButterfliesContributions', getButterfliesContributions)
+router.get('/getButterfliesContributions', getButterfliesContributions) //obtiene aportes de mariposas
 
-router.get('/getCaterpillarsContributions', getCaterpillarsContributions)
+router.get('/getCaterpillarsContributions', getCaterpillarsContributions) //obtiene aportes de orugas
+
+router.put('/addTag/:id', addTags) //agrega un tag a una especie
+
+router.put('/addPhoto/:id', addPhoto) //agrega una foto a una especie
+
+router.put('/accept/:id', acceptSpecies) //acepta una especie  accep=>true
+
+router.put('/update/:id', updateSpecies) //actualiza una especie
 
 
 
