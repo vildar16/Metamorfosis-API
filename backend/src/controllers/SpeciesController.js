@@ -206,4 +206,22 @@ SpeciesCtrl.updateSpecies = async (req, res) => {
     }
 }
 
+SpeciesCtrl.deleteSpecies = async (req, res) => {
+    try {
+        
+        await Species.findByIdAndDelete(req.params.id)
+        res.status(201).json({
+            ok: true,
+            msg: "Se ha borrado correctamente"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: "Error."
+        })
+    }
+
+}
+
 module.exports = SpeciesCtrl;

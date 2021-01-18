@@ -95,4 +95,25 @@ UserCtrl.login = async (req, res) => {
 
 }
 
+
+UserCtrl.blockUser = async (req, res) =>{
+
+    try {
+        
+        await User.updateOne({_id: req.params.id}, {blocked: true})
+        res.status(201).json({
+            ok: true,
+            msg: "Se ha bloqueado el usuario."
+        })
+    } catch (error) {
+        console.log(error)  
+        res.status(500).json({
+            ok: false,
+            msg: "Error."
+        })
+    }
+
+}
+
+
 module.exports = UserCtrl;

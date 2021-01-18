@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const { check } = require('express-validator');
 
-const{ register, login }= require("../controllers/UserController");
+const{ register, login, blockUser }= require("../controllers/UserController");
 
 
 // router.route('/register')
@@ -24,6 +24,8 @@ router.post('/login',
                 check('password', 'La contraseña debe tener al menos 6 dígitos.').isLength({min: 6})
              ] 
              ,login)
+
+router.put('/blockUser/:id', blockUser)
 
 
 
