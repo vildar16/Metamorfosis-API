@@ -39,7 +39,7 @@ const speciesSchema = new Schema(
         },
         district: {
             type: String,
-            required: true
+            required: false
         },
         description: {
             type: String,
