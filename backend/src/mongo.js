@@ -1,9 +1,9 @@
 
 const mongoose = require('mongoose');
 
-const URI = process.env.MONGODB_URI 
-    ? process.env.MONGODB_URI 
-    : 'mongodb://localhost/metamorfosis';
+const URI = 'mongodb+srv://meta_ap:mox0UuteE2rc34y0@metamorfosis.avnoo.mongodb.net/metamorfosis'
+ 
+    //: 'mongodb://localhost/metamorfosis';
 
 mongoose.connect(URI, {
     useNewUrlParser: true,
