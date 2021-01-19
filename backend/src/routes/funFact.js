@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const { check } = require('express-validator');
 
-const{ addFact, getRandom }= require("../controllers/FunFactController");
+const{ addFact, getRandom, deleteFact, getAllFacts}= require("../controllers/FunFactController");
 
 
 // router.route('/register')
@@ -20,7 +20,9 @@ router.get('/getRandomFact',
               getRandom)
 
 
+router.delete('/delete/:id', deleteFact)
 
+router.get("/getAll/", getAllFacts)
 
 
 module.exports = router;

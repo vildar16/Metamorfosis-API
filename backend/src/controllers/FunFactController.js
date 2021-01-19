@@ -43,5 +43,24 @@ FunFactCtrl.getRandom = async (req, res) => {
 
 }
 
+FunFactCtrl.getAllFacts = async (req, res) => { 
+    const allFacts = await  FunFact.find()
+    res.status(200).json({
+        allFacts
+    })
+
+}
+
+FunFactCtrl.deleteFact = async (req, res) => { 
+    
+    await FunFact.findByIdAndRemove(req.params.id)
+    resp.status(200).json({
+        ok: "ok"
+    })
+
+}
+
+
+
 
 module.exports = FunFactCtrl;
