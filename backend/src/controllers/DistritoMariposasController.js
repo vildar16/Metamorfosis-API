@@ -34,10 +34,17 @@ DistritoMariposasCtrl.getDMByCode = async (req, res) => {
     try {
 
         const dm = await DistritoMariposas.find({codigo: req.params.code});
-        console.log(dm)
+        
+        if(dm.length === 0){
+            res.status(200).json({
+                codigo: 0,
+                mariposas: 0,
+           })
+        }
+        const {codigo, mariposas} = dm[0]
         res.status(200).json({
-            ok: true,
-            result: dm
+             codigo,
+             mariposas
         })
         
     } catch (error) {
