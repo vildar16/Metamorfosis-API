@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const { check } = require('express-validator');
 
-const{ addSpecies, getSpeciesById, search, getCaterpillars, getButterflies, getButterfliesContributions, getCaterpillarsContributions, addTags, addPhoto, acceptSpecies, updateSpecies, deleteSpecies }= require("../controllers/SpeciesController");
+const{ addSpecies, getSpeciesById, search, getCaterpillars, getButterflies, getButterfliesContributions, getCaterpillarsContributions, addTags, addPhoto, acceptSpecies, updateSpecies, deleteSpecies, getAllContributions }= require("../controllers/SpeciesController");
 
 router.post('/addSpecies',
              [
@@ -30,6 +30,8 @@ router.get('/getButterfliesContributions', getButterfliesContributions) //obtien
 
 router.get('/getCaterpillarsContributions', getCaterpillarsContributions) //obtiene aportes de orugas
 
+router.get('/getAllContributions', getAllContributions) //obtiene aportes de orugas
+
 router.put('/addTag/:id', addTags) //agrega un tag a una especie
 
 router.put('/addPhoto/:id', addPhoto) //agrega una foto a una especie
@@ -38,6 +40,7 @@ router.put('/accept/:id', acceptSpecies) //acepta una especie  accep=>true
 
 router.put('/update/:id', updateSpecies) //actualiza una especie
 
+router.delete('/delete/:id', deleteSpecies) //borra una especie
 router.delete('/delete/:id', deleteSpecies) //borra una especie
 
 

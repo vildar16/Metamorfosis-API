@@ -126,6 +126,14 @@ SpeciesCtrl.getCaterpillarsContributions = async (req, res) => {
 
 }
 
+SpeciesCtrl.getAllContributions = async (req, res) => {
+    const result = await Species.find({ accepted: false})
+    res.status(200).json({
+            result
+    })
+
+}
+
 SpeciesCtrl.addTags = async (req, res) => {
     try {
         
