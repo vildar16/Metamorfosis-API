@@ -2,7 +2,10 @@ const { Router } = require('express');
 const router = Router();
 const { check } = require('express-validator');
 
-const{ addSpecies, getSpeciesById, search, getCaterpillars, getButterflies, getButterfliesContributions, getCaterpillarsContributions, addTags, addPhoto, acceptSpecies, updateSpecies, deleteSpecies, getAllContributions }= require("../controllers/SpeciesController");
+const{ addSpecies, getSpeciesById, 
+     getCaterpillars, getButterflies, getButterfliesContributions, 
+     getCaterpillarsContributions, addTags, addPhoto, acceptSpecies, 
+     updateSpecies, deleteSpecies, getAllContributions, searchMariposa, searchOruga }= require("../controllers/SpeciesController");
 
 router.post('/addSpecies',
              [
@@ -20,7 +23,10 @@ router.post('/addSpecies',
 
 router.get('/getSpeciesById/:id', getSpeciesById) //obtener una especie por _id
 
-router.get('/search/:word', search) //busca por nombre, nombre cientifico, tags, familia o genero
+router.get('/searchMariposa/:word', searchMariposa) //busca por nombre, nombre cientifico, tags, familia o genero
+
+
+router.get('/searchOruga/:word', searchOruga)
 
 router.get('/getButterflies', getButterflies) //obtiene las mariposas aceptadas
 

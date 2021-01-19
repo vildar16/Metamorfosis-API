@@ -64,15 +64,45 @@ SpeciesCtrl.getSpeciesById = async (req, res) => {
 }
 
 
-SpeciesCtrl.search = async (req, res) => {
+SpeciesCtrl.searchMariposa = async (req, res) => {
 
     const keyWord = req.params.word;
     
     try {
-        Species.find({ $or: [{ family: { $regex: keyWord, $options: 'i' }, accepted: true},
-                             { genus: { $regex: keyWord, $options: 'i' }, accepted: true},
-                             { tags: { $regex: keyWord, $options: 'i'}, accepted: true},
-                             { name: { $regex: keyWord, $options: 'i'}, accepted: true},
+        Species.find({ $or: [{ family: { $regex: keyWord, $options: 'i' }, accepted: true, stage: 'Mariposa'},
+                             { genus: { $regex: keyWord, $options: 'i' }, accepted: true, stage: 'Mariposa'},
+                             { tags: { $regex: keyWord, $options: 'i'}, accepted: true, stage: 'Mariposa'},
+                             { name: { $regex: keyWord, $options: 'i'}, accepted: true, stage: 'Mariposa'},
+                             { scientificName: { $regex: keyWord, $options: 'i'}, accepted: true}] }, 
+            function(err, result) {
+            if (err) {
+              res.send(err);
+            } else {
+              res.status(200).json(result);
+            }
+          }).sort({name: 1})
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Something went wrong...'
+
+        })
+        
+    }
+
+}
+
+SpeciesCtrl.searchOruga = async (req, res) => {
+
+    const keyWord = req.params.word;
+    
+    try {
+        Species.find({ $or: [{ family: { $regex: keyWord, $options: 'i' }, accepted: true, stage: 'Oruga'},
+                             { genus: { $regex: keyWord, $options: 'i' }, accepted: true, stage: 'Oruga'},
+                             { tags: { $regex: keyWord, $options: 'i'}, accepted: true, stage: 'Oruga'},
+                             { name: { $regex: keyWord, $options: 'i'}, accepted: true, stage: 'Oruga'},
                              { scientificName: { $regex: keyWord, $options: 'i'}, accepted: true}] }, 
             function(err, result) {
             if (err) {
