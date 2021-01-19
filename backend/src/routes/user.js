@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const { check } = require('express-validator');
 
-const{ register, login, blockUser, findByEmail }= require("../controllers/UserController");
+const{ register, login, blockUser, findByEmail, getAllUsers, unlockUser}= require("../controllers/UserController");
 
 
 // router.route('/register')
@@ -27,7 +27,12 @@ router.post('/login',
 
 router.put('/blockUser/:id', blockUser)
 
+router.put('/unlockUser/:id', unlockUser)
+
 router.get('/findByEmail/:email', findByEmail)
+
+router.get('/findAll/', getAllUsers)
+
 
 
 

@@ -95,13 +95,38 @@ UserCtrl.login = async (req, res) => {
 
 
 }
+UserCtrl.getAllUsers = async (req, res) => {
 
+    const all = await User.find();
+    res.status(200).json({
+        all
+    })
+}
 
 UserCtrl.blockUser = async (req, res) =>{
 
     try {
         
         await User.updateOne({_id: req.params.id}, {blocked: true})
+        res.status(201).json({
+            ok: true,
+            msg: "Se ha bloqueado el usuario."
+        })
+    } catch (error) {
+        console.log(error)  
+        res.status(500).json({
+            ok: false,
+            msg: "Error."
+        })
+    }
+
+}
+
+UserCtrl.unlockUser = async (req, res) =>{
+
+    try {
+        
+        await User.updateOne({_id: req.params.id}, {blocked: false})
         res.status(201).json({
             ok: true,
             msg: "Se ha bloqueado el usuario."
