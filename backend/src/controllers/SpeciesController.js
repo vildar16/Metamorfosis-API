@@ -262,4 +262,26 @@ SpeciesCtrl.deleteSpecies = async (req, res) => {
 
 }
 
+SpeciesCtrl.getCaterpillarBySName = async (req, res) => {
+    const match = await Species.find({scientificName: req.body.scientificName, stage: "Oruga"} )
+    if(!match[0]){ res.status(200).json({
+        match: {stage: "Sin información", photos: "https://res.cloudinary.com/dhh7tuvtw/image/upload/v1610998076/e2cvgro6kwt7f7kijm5o.jpg"}
+    })}
+    res.status(200).json({
+        match: match[0]
+    })
+
+}
+
+SpeciesCtrl.getButterflyBySName = async (req, res) => {
+    const match = await Species.find({scientificName: req.body.scientificName, stage: "Mariposa"} )
+    if(!match[0]){ res.status(200).json({
+        match: {stage: "Sin información", photos: "https://res.cloudinary.com/dhh7tuvtw/image/upload/v1610998076/e2cvgro6kwt7f7kijm5o.jpg"}
+    })}
+    res.status(200).json({
+        match: match[0]
+    })
+
+}
+
 module.exports = SpeciesCtrl;

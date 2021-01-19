@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const{ addSpecies, getSpeciesById, 
      getCaterpillars, getButterflies, getButterfliesContributions, 
      getCaterpillarsContributions, addTags, addPhoto, acceptSpecies, 
-     updateSpecies, deleteSpecies, getAllContributions, searchMariposa, searchOruga }= require("../controllers/SpeciesController");
+     updateSpecies, deleteSpecies, getAllContributions, searchMariposa, searchOruga, getCaterpillarBySName, getButterflyBySName }= require("../controllers/SpeciesController");
 
 router.post('/addSpecies',
              [
@@ -37,6 +37,12 @@ router.get('/getButterfliesContributions', getButterfliesContributions) //obtien
 router.get('/getCaterpillarsContributions', getCaterpillarsContributions) //obtiene aportes de orugas
 
 router.get('/getAllContributions', getAllContributions) //obtiene aportes de orugas
+
+
+router.post('/getMatchCaterpillar', getCaterpillarBySName)
+
+router.post('/getMatchButterfly', getButterflyBySName)
+
 
 router.put('/addTag/:id', addTags) //agrega un tag a una especie
 

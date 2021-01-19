@@ -117,4 +117,30 @@ UserCtrl.blockUser = async (req, res) =>{
 }
 
 
+UserCtrl.findByEmail = async (req, res) => {
+
+    try {
+
+        const resp = await User.find({email: req.params.email})
+        console.log(resp)
+        console.log(req.params)
+        res.status(200).json(
+            resp[0]
+        )
+        
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error.'
+        })
+        
+    }
+ 
+
+
+
+}
+
 module.exports = UserCtrl;
