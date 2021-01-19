@@ -81,6 +81,7 @@ UserCtrl.login = async (req, res) => {
             ok: true,
             uid: user._id,
             name: user.name,
+            admin: user.isAdmin
         })
 
     } catch (error) {
